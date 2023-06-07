@@ -10,6 +10,6 @@ class CourseAdmin(admin.ModelAdmin):
 admin.site.register(Course, CourseAdmin)
 
 
-#Super usuário login: pulqu
+#Super usuário login: pulquerio
 #Super usuário email: pulquerio.x@gmail.com
 #Super usuário senha: 123456
