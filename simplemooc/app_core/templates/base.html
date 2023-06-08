@@ -13,18 +13,19 @@
 </head>
 
 <body>
-
     <div class="header">
         <div class="pure-menu pure-menu-open pure-menu-fixed pure-menu-horizontal">
             <a class="pure-menu-heading" href="{%url 'app_core:home'%}">SIMPLE MOOC</a>
             <ul>
                 <li class="pure-menu-selected"><a href="{%url 'app_core:home'%}">Início</a></li>
-                <li><a href="{%url 'app_core:courses'%}">Cursos</a></li>
+                <li><a href="{%url 'app_courses:courses'%}">Cursos</a></li>
                 <li><a href="{%url 'app_core:contact'%}">Contato</a></li>
+                <li><a href="http://localhost:8000/admin/">Painel</a></li>
             </ul>
         </div>
     </div>
     <div class="content">
+        <br>
         {% block content %} {% endblock %}
         <div class="footer">
             Simple MOOC - Uma simples plataforma de ensino a distância

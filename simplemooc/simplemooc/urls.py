@@ -16,9 +16,15 @@ Including another URLconf
 """
 from django.urls import include, path
 from django.contrib import admin
+from django.conf import settings #Pegar todas as settings para lidar com as imagens carregadas pelo painel
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('', include(('app_core.urls_app_core', 'app_core'), namespace='app_core')),
-    path('admin/', admin.site.urls)       
+    path('cursos/', include(('app_courses.urls_app_courses', 'app_courses'), namespace='app_courses')),    
+    path('admin/', admin.site.urls)
 ]
+
+if settings.DEBUG: #Se estiver no ambiente de Debug vou adicionar uma linha a mais na PATTERNS
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
