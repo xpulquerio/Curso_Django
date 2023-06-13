@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Course
+from .forms import ContactCourse
 # Create your views here.
 
 def courses(request):
@@ -20,8 +21,19 @@ def courses(request):
 
 def details (request, slug):
     course = get_object_or_404(Course, slug=slug)
-    context = {
-        'course': course
-    }
+    context = {}
+    if request.method == 'POST':
+        form = ContactCourse(request.POST) #Se for método post deve seguir isso aqui
+        if form.is_valid():
+            context['is_valid'] = True
+            form.send_mail(course)
+            #print(form.cleaned_data)
+            #print(form.cleaned_data['name'])
+            form = ContactCourse()
+            
+    else:
+        form = ContactCourse()
+    context['form'] = form
+    context['course'] = course
     template_name = 'courses/details.html'
     return render(request, template_name, context)
