@@ -20,7 +20,12 @@
                 <li class="pure-menu-selected"><a href="{%url 'app_core:home'%}">Início</a></li>
                 <li><a href="{%url 'app_courses:courses'%}">Cursos</a></li>
                 <li><a href="{%url 'app_core:contact'%}">Contato</a></li>
-                <li><a href="{%url 'app_accounts:login'%}">Painel</a></li>
+                {% if user.is_authenticated %} <!-- Se há algum usuário autenticado, -->
+                <li><a href="{%url 'app_accounts:dashboard'%}">Painel</a></li>
+                <li><a href="{%url 'app_accounts:logout'%}">Sair</a></li>
+                {% else %}
+                <li><a href="{%url 'app_accounts:login'%}">Entrar</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
