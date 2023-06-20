@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app_core',
     'app_courses',
-    'app_cad_usuarios',
+    'app_accounts',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +140,7 @@ CONTACT_EMAIL = 'contato@simplemooc.com'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'app_accounts:login'
+LOGIN_REDIRECT_URL = 'app_core:home'
+LOGOUT_URL = 'app_accounts:logout'

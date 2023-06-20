@@ -23,7 +23,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', include(('app_core.urls_app_core', 'app_core'), namespace='app_core')),
     path('cursos/', include(('app_courses.urls_app_courses', 'app_courses'), namespace='app_courses')),    
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('conta/', include(('app_accounts.urls_app_accounts','app_accounts'), namespace='app_accounts'))
 ]
 
 if settings.DEBUG: #Se estiver no ambiente de Debug vou adicionar uma linha a mais na PATTERNS

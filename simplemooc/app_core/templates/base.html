@@ -1,6 +1,6 @@
 <!doctype html>
 {%load static %} <!-- CMT carregando arquivo da pasta static para encontrar o CSS -->
-<html lang="en">
+<html lang="pt">
 
 <head>
     <meta charset="utf-8">
@@ -20,7 +20,7 @@
                 <li class="pure-menu-selected"><a href="{%url 'app_core:home'%}">Início</a></li>
                 <li><a href="{%url 'app_courses:courses'%}">Cursos</a></li>
                 <li><a href="{%url 'app_core:contact'%}">Contato</a></li>
-                <li><a href="http://localhost:8000/admin/">Painel</a></li>
+                <li><a href="{%url 'app_accounts:login'%}">Painel</a></li>
             </ul>
         </div>
     </div>

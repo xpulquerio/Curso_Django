@@ -73,3 +73,15 @@ body .primary-button {
     padding: 1em;
     font-size: 80%;
 }
+
+.errorlist {
+    color: red;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .errorlist li {
+    margin-bottom: 5px;
+  }
+  
