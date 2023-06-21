@@ -20,4 +20,18 @@ class RegisterForm(UserCreationForm):
             user.save()
         return user
     
+class EditAccountForm(forms.ModelForm):
+    
+    def clean_email(self): #Verifica se o email digitado já existe no banco de dados
+        email_x = self.cleaned_data['email'] #email digitado pelo usuário
+        queryset = User.objects.filter(
+            email=email_x).exclude(pk=self.instance.pk) #Se existir email igual ao que foi digitando, excluindo o atual
+        if queryset.exists():
+            raise forms.ValidationError('Já existe usuário com este email')
+        return email_x #Se não, matenha o email no campo normalmente
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
+    
     

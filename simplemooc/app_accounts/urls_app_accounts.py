@@ -10,5 +10,6 @@ urlpatterns = [
     path('sair/', auth_views.LogoutView.as_view(next_page='app_core:home'), name='logout'),
     path('cadastrar/', views.register, name='register'),
     path('editar/', views.edit, name='edit'),
+    path('editar_senha/', views.edit_password, name='edit_password'),
 
 ]
