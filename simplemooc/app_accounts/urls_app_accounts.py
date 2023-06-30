@@ -8,6 +8,7 @@ urlpatterns = [
     path('entrar/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('sair/', auth_views.LogoutView.as_view(next_page='app_core:home'), name='logout'),
     path('cadastrar/', views.register, name='register'),
+    path('resetar-senha/', views.password_reset, name='reset_password'),
     path('editar/', views.edit, name='edit'),
     path('editar_senha/', views.edit_password, name='edit_password'),
 
