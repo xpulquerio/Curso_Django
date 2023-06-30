@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.forms import (UserCreationForm, PasswordChangeForm,
+    SetPasswordForm)
 from .forms import RegisterForm, EditAccountForm, PasswordResetForm
 from django.conf import settings
-from .models import PasswordReset
-from app_core.utils import generate_hash_key
+from django.shortcuts import get_object_or_404
+from app_accounts.models import PasswordReset
+
 
 User = get_user_model()
 
@@ -35,15 +37,21 @@ def password_reset(request):
     template_name = 'password_reset.html'
     form = PasswordResetForm(request.POST or None)
     if form.is_valid():
-        user = User.objects.get(email=form.cleaned_data['email'])
-        key = generate_hash_key(user.username)
-        reset = PasswordReset(key=key, user=user)
-        reset.save()
+        form.save()
         context['success'] = True
-
     context['form'] = form
     return render(request, template_name, context)
 
+def password_reset_confirm(request, key):
+    template_name = 'password_reset_confirm.html'
+    context = {}
+    reset = get_object_or_404(PasswordReset, key=key)
+    form = SetPasswordForm(user=reset.user, data=request.POST or None)
+    if form.is_valid():
+        form.save()
+        context['success'] = True
+    context['form'] = form
+    return render(request, template_name, context)
 @login_required
 def edit(request):
     template_name = 'edit.html'

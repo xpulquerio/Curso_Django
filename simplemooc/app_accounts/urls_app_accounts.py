@@ -9,7 +9,7 @@ urlpatterns = [
     path('sair/', auth_views.LogoutView.as_view(next_page='app_core:home'), name='logout'),
     path('cadastrar/', views.register, name='register'),
     path('resetar-senha/', views.password_reset, name='reset_password'),
+    path('confirmar-resetar-senha/<str:key>/', views.password_reset_confirm, name='password_reset_confirm'),
     path('editar/', views.edit, name='edit'),
     path('editar_senha/', views.edit_password, name='edit_password'),
-
 ]

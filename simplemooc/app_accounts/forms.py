@@ -1,6 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import get_user_model #Para usar o model do nosso usuário
+from app_core.mail import send_email_template
+from .models import PasswordReset
+from app_core.utils import generate_hash_key
 
 User = get_user_model()
 
@@ -15,6 +18,18 @@ class PasswordResetForm(forms.Form):
         raise forms.ValidationError(
             'Nenhum usuário encontrado com este e-mail'
         )
+
+    def save(self):
+        user = User.objects.get(email=self.cleaned_data['email'])
+        key = generate_hash_key(user.username)
+        reset = PasswordReset(key=key, user=user)
+        reset.save()
+        template_name='password_reset_mail.html'
+        subject = 'Criar nova senha no simple MOOC'
+        context = {
+            'reset': reset,
+        }
+        send_email_template(subject,template_name, context, [user.email])
 
 class RegisterForm(forms.ModelForm):
 
